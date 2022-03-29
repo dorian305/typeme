@@ -1,0 +1,173 @@
+<!doctype html>
+<html>
+<head>
+<!-- Primary Meta Tags -->
+<meta charset="utf-8">
+<meta name="robots" content="index, follow" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Type Me - A JavaScript typing library</title>
+<meta name="title" content="Type Me - A JavaScript typing library">
+<meta name="description" content="TypeMe.js is a library written in vanilla JS (no dependencies, yay!), which prints strings as if they were written on a keyboard. Pass an array of strings which you want to type out, and let the library take care of the rest. Library offers plenty of options to customize the animations to suit your project's needs.">
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website"> 
+<meta property="og:url" content="http://manjaric.com">
+<meta property="og:title" content="Type Me - A JavaScript typing library">
+<meta property="og:description" content="TypeMe.js is a library written in vanilla JS (no dependencies, yay!), which prints strings as if they were written on a keyboard. Pass an array of strings which you want to type out, and let the library take care of the rest. Library offers plenty of options to customize the animations to suit your project's needs.">
+<meta property="og:image" content="http://manjaric.com/img/headerbg.jpg">
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:url" content="http://manjaric.com">
+<meta property="twitter:title" content="Type Me - A JavaScript typing library">
+<meta property="twitter:description" content="TypeMe.js is a library written in vanilla JS (no dependencies, yay!), which prints strings as if they were written on a keyboard. Pass an array of strings which you want to type out, and let the library take care of the rest. Library offers plenty of options to customize the animations to suit your project's needs.">
+<meta property="twitter:image" content="http://manjaric.com/img/headerbg.jpg">
+    
+<!-- Links -->
+<link href="css/typeMe.css" rel="stylesheet" type="text/css">
+<link href="css/site.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+    <!-- Terminal -->
+    <header>
+        <h1 id="title">TypeMe.js</h1>
+        <div id="terminalDiv">
+        </div>
+    </header>
+    
+    <!-- How to use it -->
+    <section>
+        <h1>How to use</h1>
+        <p>Find an element to animate in: <span class="inline-code">let myElement = document.querySelector("myElement");</span></p>
+        <p>Define an array of strings: <span class="inline-code">let myStringArray = ["String 1", "String 2", ...];</span></p>
+        <p> > If it's only 1 string, you can define it as it is, no need to put it in array: <span class="inline-code">let myString = "My string";</span></p>
+        <p>Call the animation: <span class="inline-code">let myAnimation = new typeMe({ element: myElement, strings: myStringArray });</span></p>
+        
+        <!-- Code wrapper -->
+        <div class="codeWrapper">
+            let elem = document.querySelector("myElement");
+            let str = ["String 1", "String 2", ...];
+            
+            let myAnimation = new typeMe({
+                element: myElement,
+                strings: myStringArray,
+                //Extend with options if needed
+            });
+        </div>
+        
+        <!-- Options explanation -->
+        <h1>Options</h1>
+        <p><span class="inline-code">typingSpeed: int</span> - the speed (in milliseconds) at which the animation will animate letter typing.</p>
+        <p><span class="inline-code">deletingSpeed: int</span> - the speed (in milliseconds) at which the animation will animate letter backspacing.</p>
+        <p><span class="inline-code">stringBackspaceDelay: int</span> - the time (in miliseconds) before typed out string will start backspace animation.</p>
+        <p><span class="inline-code">stringTypeDelay: int</span> - the time (in miliseconds) before the new string will start typing animation.</p>
+        <p><span class="inline-code">animationStartDelay: int</span> - the time (in miliseconds) before the animation starts.</p>
+        <p><span class="inline-code">loop: bool</span> - if set to <span class="inline-code">true</span>, animation will repeat indefinitely or until animation instance is destroyed.</p>
+        <p> > <span class="inline-code">stopOnLastString</span> flag must be disabled to allow animation looping.</p>
+        <p><span class="inline-code">stopOnLastString: bool</span> - if set to <span class="inline-code">true</span>, the last string will not be erased.</p>
+        <p><span class="inline-code">destroyVerticalLine: bool</span> - if set to <span class="inline-code">true</span>, the vertical line will be deleted when animation finishes.</p>
+        <p><span class="inline-code">onAnimationComplete: function</span> - executes a function on animation completion.</p>
+        
+        <!-- Code wrapper -->
+        <div class="codeWrapper">
+            let myAnimation = new typeMe({
+                element: myElement,
+                strings: myStringArray,
+            
+                //Default values
+                typingSpeed: 70,
+                deletingSpeed: 30,
+                stringBackspaceDelay: 1000,
+                stringTypeDelay: 0,
+                animationStartDelay: 0,
+                loop: false,
+                stopOnLastString: false,
+                destroyVerticalLine: false,
+                onAnimationComplete: () => { }
+            });
+        </div>
+        
+        <!-- Download and installation -->
+        <div id="downloadContainer">
+            <a href="https://github.com/dorian305/typeme">Download TypeMe</a>
+        </div>
+        
+        <h1>How to install</h1>
+        <p>Import stylesheet: <span class="inline-code">&lt;link href=&quot;css/typeMe.css&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot;&gt;</span></p>
+        <p>Import javascript: <span class="inline-code">&lt;script src=&quot;js/typeMe-min.js&quot;&gt;&lt;/script&gt;</span></p>
+        <p>Make sure the paths to the files are valid.</p>
+    </section>
+    <div id="separator"></div>
+    
+    <!-- Try it section -->
+    <section>
+        <h1>Try it</h1>
+        <!-- Paragraph for test string -->
+        <p id="tryIt_p" class="animationStringParagraph"></p>
+        
+        <!-- Sliders for numeric values -->
+        <label>Typing speed: <span id="tryIt_typeSpeedValueSpan">50</span>ms</label><br>
+        <input type="range" min="1" max="100" value="50" id="typingSpeed_slider"> Max: <input class="input_number" type="number" id="typingSpeed_maxValue" value="100"><br>
+        <label>Backspace speed: <span id="tryIt_deleteSpeedValueSpan">50</span>ms</label><br>
+        <input type="range" min="1" max="100" value="50" id="deletingSpeed_slider"> Max: <input class="input_number" type="number" id="deletingSpeed_maxValue" value="100"><br>
+        <label>String backspace delay: <span id="tryIt_stringBackspaceDelayValueSpan">1000</span>ms</label><br>
+        <input type="range" min="0" max="1000" value="1000" id="stringBackspaceDelay_slider"> Max: <input class="input_number" type="number" id="stringBackspaceDelay_maxValue" value="1000"><br>
+        <label>String type delay: <span id="tryIt_stringTypeDelayValueSpan">0</span>ms</label><br>
+        <input type="range" min="0" max="1000" value="0" id="stringTypeDelay_slider"> Max: <input class="input_number" type="number" id="stringTypeDelay_maxValue" value="1000"><br>
+        <label>Animation start delay: <span id="tryIt_animationStartDelayValueSpan">0</span>ms</label><br>
+        <input type="range" min="0" max="1000" value="0" id="animationStartDelay_slider"> Max: <input class="input_number" type="number" id="animationStartDelay_maxValue" value="1000"><br>
+        
+        <!-- Checkboxed for boolean values -->
+        <span class="booleanCheckboxSpan">Loop <input type="checkbox" id="loop_checkbox"></span>
+        <span class="booleanCheckboxSpan">Stop on last string <input type="checkbox" id="stopOnLastString_checkbox"></span>
+        <span class="booleanCheckboxSpan">Destroy vertical line <input type="checkbox" id="destroyVerticalLine_checkbox"></span>
+        
+        <!-- Code wrapper -->
+        <div class="codeWrapper" id="tryIt_codeWrapper">
+            let myAnimation = new typeMe({
+                element: myElement,
+                strings: myStringArray,
+                typingSpeed: 50,
+                deletingSpeed: 50,
+                stringBackspaceDelay: 1000,
+                stringTypeDelay: 0,
+                animationStartDelay: 0,
+                loop: false,
+                stopOnLastString: false,
+                destroyVerticalLine: false,
+            });
+        </div>
+    </section>
+    <div id="separator"></div>
+    
+    <!-- Animation methods section -->
+    <section id="methods_section">
+        <h1>Methods</h1>
+        <p>Methods accept callback functions.</p>
+        <p><span class="inline-code">.toggle(function);</span> - toggle animation's pause/resume states</p>
+        <p><span class="inline-code">.restart(function);</span> - restarts the animation</p>
+        <p><span class="inline-code">.destroy(function);</span> - destroy animation instance</p>
+        
+        <p id="methods_p" class="animationStringParagraph"></p>
+        <button class="methods_button" id="methods_toggleButton">Toggle</button>
+        <button class="methods_button" id="methods_restartButton">Restart</button>
+        <button class="methods_button" id="methods_destroyButton">Destroy</button>
+        <button class="methods_button" id="methods_reset" style="display: none;">Reset</button>
+        <div class="codeWrapper" id="methods_codeWrapper">
+            //Animation instance
+            myAnimation
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <span>Copyright @ 2020 - <span id="currentYear"></span></span>
+        <span>Library created by <a href="http://manjaric.com">Dorian</a></span>
+    </footer>
+    
+    <!-- Scripts -->
+    <script src="js/typeMe.js"></script>
+    <script src="js/site.js"></script>
+</body>
+</html>

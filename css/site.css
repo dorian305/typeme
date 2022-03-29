@@ -1,0 +1,306 @@
+/* Custom fonts */
+@font-face {
+  font-family: 'terminal', monospace;
+  src: url("../fonts/terminal.ttf");
+}
+
+@font-face {
+  font-family: 'headers', monospace;
+  src: url("../fonts/headers.otf");
+}
+
+/* Styling for body element */
+body {
+    margin: 0;
+    background-color: #383545;
+    color: lightgray;
+    font-family: system-ui !important;
+}
+
+/* Header titles styling */
+h1, h2, h3, h4, h5 {
+    font-family: 'headers', monospace;
+}
+
+/* Links */
+a {
+    text-decoration: none;
+    color: #69D4AA;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Styling for header element */
+header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 798px;
+    border-bottom: 2px solid #756d96;
+    background-image: url("../img/headerbg.jpg");
+    background-position: center;
+    background-size: cover;
+}
+
+/* Terminal div in header element */
+div#terminalDiv {
+    width: 50%;
+    min-width: 300px;
+    max-width: 700px;
+    height: 70%;
+    max-height: 500px;
+    background-color: rgba(0, 0, 0, 0.9);
+    border-radius: 5px;
+    border: 2px solid #adadad;
+    border-top: none;
+    overflow-y: auto;
+    text-align: justify;
+    font-family: 'terminal', monospace;
+    letter-spacing: 1pt;
+}
+
+/* Toolbar for terminal div */
+div#terminalDiv::before {
+    content: "Console";
+    height: 35px;
+    padding: 0 10px;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    background-color: #adadad;
+    color: #0000007a;
+    font-weight: bold;
+}
+
+div#terminalDiv::before:hover {
+    cursor: move;
+}
+
+/* Title */
+h1#title {
+    color: #332c30;
+    font-size: 45pt;
+}
+
+/* Terminal command lines */
+div#terminalDiv p {
+    padding: 0 10px;
+}
+
+/* Selection color for terminal lines*/
+div#terminalDiv p::selection, div#terminalDiv span::selection {
+    background-color: white;
+}
+
+/* Sections styling */
+section {
+    width: 50%;
+    margin: 100px auto;
+}
+
+@media (min-width: 320px) and (orientation: portrait){
+    section {
+        width: unset;
+        margin: 10px;
+    }
+}
+
+/* Animation string paragraphs */
+p.animationStringParagraph {
+    border: 1px solid #756d96;
+    border-radius: 5px;
+    padding: 10px;
+    background-color: #423f50;
+    text-align: left;
+}
+
+/* Mimicing placeholder on div elements */
+p#tryIt_p:empty::before {
+    color: #625e75;
+    content: "Edit options to start the animation.";
+}
+
+/* Sliders */
+input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    background-color: #756d96;
+    outline: none;
+    width: 50%;
+    height: 10px;
+    border-radius: 10px;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    background-color: #69D4AA;
+    cursor: pointer;
+    border-radius: 100px;
+}
+
+input[type="range"]::-webkit-slider-thumb:hover {
+    background-color: #58b18e;
+}
+
+/* Max value input numbers */
+input.input_number {
+    color: #756d96;
+    outline: none;
+    background-color: #1f1e27;
+    border: none;
+    width: 50px;
+    height: 20px;
+    text-align: center;
+    appearance: textfield;
+    border-radius: 2px;
+}
+
+/* Webkit prefix */
+input.input_number::-webkit-outer-spin-button, input.input_number::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox prefix */
+input.input_number {
+    -moz-appearance: textfield;
+}
+
+p#methods_p:empty::before {
+    color: #625e75;
+    content: "The animation has been destroyed. Press 'Reset' button to start a new animation."
+}
+
+/* Toggle buttons */
+button {
+    border: none;
+    background-color: #2a5645;
+    outline: none;
+    color: lightgrey;
+    height: 50px;
+    width: 150px;
+    font-size: 12pt;
+    border-radius: 10px;
+    padding: 0;
+    margin: 0;
+    font-family: system-ui;
+}
+
+button:hover {
+    background-color: #264c3d;
+}
+
+/* Boolean checkbox wrappers */
+span.booleanCheckboxSpan {
+    display: inline-flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 0;
+    padding: 0 0 0 10px;
+    background-color: #2a5645;
+    border-radius: 5px;
+    text-align: center;
+    overflow: hidden;
+}
+
+/* Checkboxes */
+input[type="checkbox"] {
+    width: 30px;
+    height: 30px;
+    margin: 0 0 0 20px;
+    padding: 0;
+    cursor: pointer;
+    appearance: none;
+    background-color: #bb1313;
+    outline: none;
+    transition: background-color 250ms;
+}
+
+input[type="checkbox"]:checked {
+    background-color: #00b900;
+}
+
+/* Div wrapper for example code */
+div.codeWrapper {
+    margin-top: 25px;
+    white-space: pre-wrap;
+    color: #756d96;
+    background: #1f1e27;
+    border: 2px solid #756d96;
+    border-top: none;
+    border-radius: 5px;
+}
+
+div.codeWrapper::before {
+    content: "Syntax";
+    background-color: #756d96;
+    color: lightgrey;
+    width: calc(100% - 10px);
+    display: inline-block;
+    padding: 5px 0 5px 10px;
+    margin-bottom: 10px;
+}
+
+/* Download */
+div#downloadContainer {
+    margin: 50px 0;
+    text-align: center;
+}
+
+div#downloadContainer a {
+    height: 75px;
+    width: 200px;
+    color: inherit;
+    text-decoration: none;
+    background-color: #2a5645;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15pt;
+}
+
+div#downloadContainer a:active {
+    background-color: #264c3d;
+}
+
+
+/* Inline code wrapper */
+span.inline-code {
+    color: #756d96;
+    padding: 2px;
+    background-color: #1f1e27;   
+}
+
+/* Element separator */
+div#separator {
+    height: 2px;
+    background-color: #756d96;
+    margin: 50px 100px;
+}
+
+@media (min-width: 320px) and (orientation: portrait){
+    div#separator {
+        margin: 50px 10px;
+    }
+}
+
+/* Footer */
+footer {
+    padding: 25px 0;
+    background-color: #1f1e27;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+footer span:not(span#currentYear) {
+    margin: 0 10px;
+    text-align: center;
+}

@@ -161,6 +161,19 @@ input.input_number {
     border-radius: 2px;
 }
 
+/* Input text */
+input.input_text {
+    color: #756d96;
+    outline: none;
+    background-color: #1f1e27;
+    border: none;
+    width: 100px;
+    height: 30px;
+    text-align: center;
+    appearance: textfield;
+    border-radius: 2px;
+}
+
 /* Webkit prefix */
 input.input_number::-webkit-outer-spin-button, input.input_number::-webkit-inner-spin-button {
     -webkit-appearance: none;
@@ -303,4 +316,8 @@ footer {
 footer span:not(span#currentYear) {
     margin: 0 10px;
     text-align: center;
+}
+
+.note {
+    text-decoration: underline;
 }

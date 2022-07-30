@@ -24,8 +24,11 @@
 <meta property="twitter:image" content="http://manjaric.com/img/headerbg.jpg">
     
 <!-- Links -->
-<link href="css/typeMe.css" rel="stylesheet" type="text/css">
-<link href="css/site.css" rel="stylesheet" type="text/css">
+<link href="site.css?ver=2" rel="stylesheet" type="text/css">
+
+<!-- Scripts -->
+<script src="src/typeme-min.js?ver=2" defer></script>
+<script src="site.js?ver=2" defer></script>
 </head>
 
 <body>
@@ -38,65 +41,76 @@
     
     <!-- How to use it -->
     <section>
-        <h1>How to use</h1>
-        <p>Find an element to animate in: <span class="inline-code">let myElement = document.querySelector("myElement");</span></p>
-        <p>Define an array of strings: <span class="inline-code">let myStringArray = ["String 1", "String 2", ...];</span></p>
-        <p> > If it's only 1 string, you can define it as it is, no need to put it in array: <span class="inline-code">let myString = "My string";</span></p>
-        <p>Call the animation: <span class="inline-code">let myAnimation = new typeMe({ element: myElement, strings: myStringArray });</span></p>
-        
-        <!-- Code wrapper -->
-        <div class="codeWrapper">
-            let elem = document.querySelector("myElement");
-            let str = ["String 1", "String 2", ...];
-            
-            let myAnimation = new typeMe({
-                element: myElement,
-                strings: myStringArray,
-                //Extend with options if needed
-            });
-        </div>
-        
-        <!-- Options explanation -->
-        <h1>Options</h1>
-        <p><span class="inline-code">typingSpeed: int</span> - the speed (in milliseconds) at which the animation will animate letter typing.</p>
-        <p><span class="inline-code">deletingSpeed: int</span> - the speed (in milliseconds) at which the animation will animate letter backspacing.</p>
-        <p><span class="inline-code">stringBackspaceDelay: int</span> - the time (in miliseconds) before typed out string will start backspace animation.</p>
-        <p><span class="inline-code">stringTypeDelay: int</span> - the time (in miliseconds) before the new string will start typing animation.</p>
-        <p><span class="inline-code">animationStartDelay: int</span> - the time (in miliseconds) before the animation starts.</p>
-        <p><span class="inline-code">loop: bool</span> - if set to <span class="inline-code">true</span>, animation will repeat indefinitely or until animation instance is destroyed.</p>
-        <p> > <span class="inline-code">stopOnLastString</span> flag must be disabled to allow animation looping.</p>
-        <p><span class="inline-code">stopOnLastString: bool</span> - if set to <span class="inline-code">true</span>, the last string will not be erased.</p>
-        <p><span class="inline-code">destroyVerticalLine: bool</span> - if set to <span class="inline-code">true</span>, the vertical line will be deleted when animation finishes.</p>
-        <p><span class="inline-code">onAnimationComplete: function</span> - executes a function on animation completion.</p>
-        
-        <!-- Code wrapper -->
-        <div class="codeWrapper">
-            let myAnimation = new typeMe({
-                element: myElement,
-                strings: myStringArray,
-            
-                //Default values
-                typingSpeed: 70,
-                deletingSpeed: 30,
-                stringBackspaceDelay: 1000,
-                stringTypeDelay: 0,
-                animationStartDelay: 0,
-                loop: false,
-                stopOnLastString: false,
-                destroyVerticalLine: false,
-                onAnimationComplete: () => { }
-            });
-        </div>
-        
         <!-- Download and installation -->
         <div id="downloadContainer">
-            <a href="https://github.com/dorian305/typeme">Download TypeMe</a>
+            <a href="https://github.com/dorian305/typeme" target="_blank">Download TypeMe</a>
         </div>
         
         <h1>How to install</h1>
-        <p>Import stylesheet: <span class="inline-code">&lt;link href=&quot;css/typeMe.css&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot;&gt;</span></p>
-        <p>Import javascript: <span class="inline-code">&lt;script src=&quot;js/typeMe-min.js&quot;&gt;&lt;/script&gt;</span></p>
-        <p>Make sure the paths to the files are valid.</p>
+        <p>Import JavaScript file: <span class="inline-code">&lt;script src=&quot;js/typeme-min.js&quot;&gt;&lt;/script&gt;</span></p>
+        
+        <h1>How to use</h1>
+        
+        <!-- Code wrapper -->
+        <div class="codeWrapper">
+            const myTypeMe = new TypeMe({
+                elem: "#myElement, .myElements",
+                strings: ["String1", "String2"],
+            });
+            myTypeMe.start();
+        </div>
+        <p>And you're done. Watch the plugin animate typing!</p>
+        <p class="note">> If the plugin detects multiple elements, the animation will be mirrored on them.</p>
+        
+        <!-- Animation properties explanation -->
+        <h1>Properties</h1>
+        <p><span class="inline-code">typeSpeed: int</span> - Animation typing speed (Default: 70)</p>
+        <p><span class="inline-code">backspaceSpeed: int</span> - Animation backspacing speed (Default: 20)</p>
+        <p><span class="inline-code">pauseAfterFullstop: int</span> - Amount of time the animation will wait after full stop in a string (Default: 500)</p>
+        <p><span class="inline-code">loop: bool</span> - Loop animation (Default: false)</p>
+        <p><span class="inline-code">stopOnLastString: bool</span> - Skip backspacing last string after finished typing (Default: true)</p>
+        <p><span class="inline-code">animationStartDelay: int</span> - Delay before the animation starts (Default: 750)</p>
+        <p><span class="inline-code">typeStartDelay: int</span> - Delay before each sentence starts being typed out (Default: 500)</p>
+        <p><span class="inline-code">backspaceStartDelay: int</span> - Delay before each sentence starts being backspaced (Default: 500)</p>
+        <p><span class="inline-code">onBegin</span> - Callback function that runs after the animation has started</p>
+        <p><span class="inline-code">onStringFinished</span> - Callback function that runs after typing out each string</p>
+        <p><span class="inline-code">onComplete</span> - Callback function that runs after the animation is complete</p>
+
+        <!-- Cursor properties explanation -->
+        <h1>Cursor properties</h1>
+        <p><span class="inline-code">cursorID: string</span> - Adds the ID to the cursor element</p>
+        <p><span class="inline-code">cursorClass: string</span> - Adds the class name to the cursor element</p>
+        <p><span class="inline-code">cursor: string</span> - Sets the cursor element (Default: "|")</p>
+        <p><span class="inline-code">cursorRemoveOnAnimationComplete: boolean</span> - Removes the cursor on animation completion</p>
+        <p class="note">> If the animation is used on an input element, the cursor won't be displayed!</p>
+        
+        <!-- Code wrapper -->
+        <div class="codeWrapper">
+            const myTypeMe = new TypeMe({
+                elem: "#myElement, .myElements",
+                strings: ["String1", "String2"],
+                properties: {
+                    typeSpeed: 70,
+                    backspaceSpeed: 20,
+                    pauseAfterFullstop: 500,
+                    loop: false,
+                    stopOnLastString: true,
+                    animationStartDelay: 750,
+                    typeStartDelay: 500,
+                    backspaceStartDelay: 500,
+                    onBegin: () => console.log("animation started"),
+                    onStringFinished: () => console.log("string finished"),
+                    onComplete: () => console.log("animation complete"),
+                },
+                cursorProperties: {
+                    cursorID: "typingCursorID",
+                    cursorClass: "typingCursorClass",
+                    cursor: "|",
+                    cursorRemoveOnAnimationComplete: true,
+                },
+            });
+            myTypeMe.start();
+        </div>
     </section>
     <div id="separator"></div>
     
@@ -107,35 +121,53 @@
         <p id="tryIt_p" class="animationStringParagraph"></p>
         
         <!-- Sliders for numeric values -->
-        <label>Typing speed: <span id="tryIt_typeSpeedValueSpan">50</span>ms</label><br>
-        <input type="range" min="1" max="100" value="50" id="typingSpeed_slider"> Max: <input class="input_number" type="number" id="typingSpeed_maxValue" value="100"><br>
-        <label>Backspace speed: <span id="tryIt_deleteSpeedValueSpan">50</span>ms</label><br>
-        <input type="range" min="1" max="100" value="50" id="deletingSpeed_slider"> Max: <input class="input_number" type="number" id="deletingSpeed_maxValue" value="100"><br>
-        <label>String backspace delay: <span id="tryIt_stringBackspaceDelayValueSpan">1000</span>ms</label><br>
-        <input type="range" min="0" max="1000" value="1000" id="stringBackspaceDelay_slider"> Max: <input class="input_number" type="number" id="stringBackspaceDelay_maxValue" value="1000"><br>
-        <label>String type delay: <span id="tryIt_stringTypeDelayValueSpan">0</span>ms</label><br>
-        <input type="range" min="0" max="1000" value="0" id="stringTypeDelay_slider"> Max: <input class="input_number" type="number" id="stringTypeDelay_maxValue" value="1000"><br>
-        <label>Animation start delay: <span id="tryIt_animationStartDelayValueSpan">0</span>ms</label><br>
-        <input type="range" min="0" max="1000" value="0" id="animationStartDelay_slider"> Max: <input class="input_number" type="number" id="animationStartDelay_maxValue" value="1000"><br>
+        <h3>Properties</h3>
+        <label>Type speed: <span id="tryIt_typeSpeedValueSpan">70</span>ms</label><br>
+        <input type="range" min="1" max="100" value="70" id="typeSpeed_slider"> Max: <input class="input_number" type="number" id="typeSpeed_maxValue" value="100"><br>
+        <label>Backspace speed: <span id="tryIt_backspaceSpeedValueSpan">20</span>ms</label><br>
+        <input type="range" min="1" max="100" value="20" id="backspaceSpeed_slider"> Max: <input class="input_number" type="number" id="backspaceSpeed_maxValue" value="100"><br>
+        <label>Fullstop pause: <span id="tryIt_fullstopPauseValueSpan">130</span>ms</label><br>
+        <input type="range" min="1" max="1000" value="130" id="fullstopPause_slider"> Max: <input class="input_number" type="number" id="fullstopPause_maxValue" value="1000"><br>
+        <label>Animation start delay: <span id="tryIt_animationStartDelayValueSpan">750</span>ms</label><br>
+        <input type="range" min="0" max="1000" value="750" id="animationStartDelay_slider"> Max: <input class="input_number" type="number" id="animationStartDelay_maxValue" value="1000"><br>
+        <label>Type start delay: <span id="tryIt_typeStartDelayValueSpan">500</span>ms</label><br>
+        <input type="range" min="0" max="1000" value="500" id="typeStartDelay_slider"> Max: <input class="input_number" type="number" id="typeStartDelay_maxValue" value="1000"><br>
+        <label>Backspace start delay: <span id="tryIt_backspaceStartDelayValueSpan">500</span>ms</label><br>
+        <input type="range" min="0" max="1000" value="500" id="backspaceStartDelay_slider"> Max: <input class="input_number" type="number" id="backspaceStartDelay_maxValue" value="1000"><br>
         
         <!-- Checkboxed for boolean values -->
         <span class="booleanCheckboxSpan">Loop <input type="checkbox" id="loop_checkbox"></span>
         <span class="booleanCheckboxSpan">Stop on last string <input type="checkbox" id="stopOnLastString_checkbox"></span>
-        <span class="booleanCheckboxSpan">Destroy vertical line <input type="checkbox" id="destroyVerticalLine_checkbox"></span>
+
+        <h3>Cursor properties</h3>
+        <label>Cursor: <span id="tryIt_cursorValueSpan">|</span></label><br>
+        <input type="text" value="|" class="input_text" id="cursor_input"><br>
+        <span class="booleanCheckboxSpan">Remove cursor on animation complete <input type="checkbox" id="cursorRemoveOnAnimationComplete_checkbox"></span>
         
         <!-- Code wrapper -->
         <div class="codeWrapper" id="tryIt_codeWrapper">
-            let myAnimation = new typeMe({
-                element: myElement,
-                strings: myStringArray,
-                typingSpeed: 50,
-                deletingSpeed: 50,
-                stringBackspaceDelay: 1000,
-                stringTypeDelay: 0,
-                animationStartDelay: 0,
-                loop: false,
-                stopOnLastString: false,
-                destroyVerticalLine: false,
+            let tryIt_animationInstance = new TypeMe({
+                elem: "#tryIt_p",
+                strings: [
+                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+                    "Nam vel congue lacus. Duis a nisl nec dui sollicitudin condimentum a pellentesque ante.",
+                    "Etiam viverra sit amet tortor non maximus.",
+                    "Pharetra vulputate ex, eu convallis lectus posuere eu.",
+                ],
+                properties: {
+                    typeSpeed: 70,
+                    backspaceSpeed: 20,
+                    pauseAfterFullstop: 500,
+                    loop: false,
+                    stopOnLastString: true,
+                    animationStartDelay: 750,
+                    typeStartDelay: 500,
+                    backspaceStartDelay: 500,
+                },
+                cursorProperties: {
+                    cursor: "|",
+                    cursorRemoveOnAnimationComplete: false,
+                },
             });
         </div>
     </section>
@@ -144,30 +176,26 @@
     <!-- Animation methods section -->
     <section id="methods_section">
         <h1>Methods</h1>
-        <p>Methods accept callback functions.</p>
-        <p><span class="inline-code">.toggle(function);</span> - toggle animation's pause/resume states</p>
-        <p><span class="inline-code">.restart(function);</span> - restarts the animation</p>
-        <p><span class="inline-code">.destroy(function);</span> - destroy animation instance</p>
+        <p>TypeMe offers couple of methods to manipulate the state of the animation. All methods accept a callback function.</p>
+        <p><span class="inline-code">.pause(callback);</span> - pauses the animation</p>
+        <p><span class="inline-code">.resume(callback);</span> - resumes the animation</p>
+        <p><span class="inline-code">.toggle(callback);</span> - toggles between paused and resumed states</p>
+        <p><span class="inline-code">.restart(callback);</span> - restarts the animation</p>
         
-        <p id="methods_p" class="animationStringParagraph"></p>
+        <p id="methods_p" class="animationStringParagraph" placeholder="Click on start button to start the animation"></p>
+        <button class="methods_button" id="methods_pauseButton">Pause</button>
+        <button class="methods_button" id="methods_resumeButton">Resume</button>
         <button class="methods_button" id="methods_toggleButton">Toggle</button>
         <button class="methods_button" id="methods_restartButton">Restart</button>
-        <button class="methods_button" id="methods_destroyButton">Destroy</button>
-        <button class="methods_button" id="methods_reset" style="display: none;">Reset</button>
         <div class="codeWrapper" id="methods_codeWrapper">
-            //Animation instance
-            myAnimation
+            Click on the method to test it
         </div>
     </section>
     
     <!-- Footer -->
     <footer>
         <span>Copyright @ 2020 - <span id="currentYear"></span></span>
-        <span>Library created by <a href="http://manjaric.com">Dorian</a></span>
+        <span>Plugin created by <a href="https://manjaric.com">Dorian</a></span>
     </footer>
-    
-    <!-- Scripts -->
-    <script src="js/typeMe.js"></script>
-    <script src="js/site.js"></script>
 </body>
 </html>

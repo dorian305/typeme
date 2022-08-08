@@ -205,5 +205,34 @@ let methods_restartButton = document.querySelector("#methods_restartButton");
     });
 });
 
+/**
+ * Dragging terminal window by the toolbar (::before)
+ */
+let dragging = false;
+let mouseOnToolbar = false;
+const header = document.querySelector("header");
+header.addEventListener("mousemove", e => {
+    const terminalLeft = terminal.offsetLeft;
+    const terminalTop = terminal.offsetTop;
+    const mouse = {x: e.pageX, y: e.pageY};
+    
+    // 35 is the height of the terminal toolbar
+    mouseOnToolbar = !(mouse.x < terminalLeft || mouse.x > terminalLeft + terminal.clientWidth || mouse.y < terminalTop || mouse.y > terminalTop + 35) ? true : false;
+
+    // Updating toolbar position on dragging
+    if (dragging){
+        terminal.style.position = "absolute";
+        terminal.style.left = terminalLeft + e.movementX + "px";
+        terminal.style.top = terminalTop + e.movementY + "px";
+    }
+});
+header.addEventListener("mousedown", e => dragging = mouseOnToolbar ? true : false);
+header.addEventListener("mouseup", e => dragging = false);
+header.addEventListener("mouseleave", e => dragging = false);
+
+/**
+ * Centering terminal
+ */
+
 //Updating footer copyright year
 document.querySelector("#currentYear").innerHTML = new Date().getFullYear();

@@ -91,7 +91,7 @@ class TypeMe {
         this.cursorClass = (typeof cursorProperties?.cursorClass !== "undefined") ? cursorProperties.cursorClass : ""; // Cursor element class name
         this.cursor = (typeof cursorProperties?.cursor !== "undefined") ? cursorProperties.cursor : "|"; // The cursor character
         this.cursorRemoveOnAnimationComplete = (typeof cursorProperties?.cursorRemoveOnAnimationComplete !== "undefined") ? cursorProperties.cursorRemoveOnAnimationComplete : false; // Removes the cursor on animation complete
-        // this.cursorAnimationSpeed = cursorProperties?.cursorAnimationSpeed || 25;   // Number of times typing cursor blinks in a second
+        this.cursorAnimationSpeed = cursorProperties?.cursorAnimationSpeed || 2;   // Number of times cursor blinks in a second
 
         /**
          * Animation default properties
@@ -284,7 +284,7 @@ class TypeMe {
         }
         this.opacity += this.cursorStepValueSign * this.cursorStepValue;
         this.typingCursors.forEach(typingCursor => typingCursor.style.opacity = `${this.opacity}`);
-        this.typingCursorAnimationTimerID = new Timer(() => this.#cursorOpacityAnimation(), 50, true);
+        this.typingCursorAnimationTimerID = new Timer(() => this.#cursorOpacityAnimation(), (1000 / this.cursorAnimationSpeed) / 20, true);
     }
 
     /**
@@ -301,14 +301,12 @@ class TypeMe {
              */
             if (element.tagName.toLowerCase() === "input" && element.getAttribute("type") === "text" || element.tagName.toLowerCase() === "textarea"){
                 element.value += this.strings[this.currentString][this.currentLetterIndex];
-                element.scrollLeft = element.scrollWidth;
-                element.scrollTop = element.scrollHeight;
             }
             else {
                 element.querySelector("span:first-child").textContent += this.strings[this.currentString][this.currentLetterIndex];
-                element.scrollLeft = element.scrollWidth;
-                element.scrollTop = element.scrollHeight;
             }
+            element.scrollLeft = element.scrollWidth;
+            element.scrollTop = element.scrollHeight;
         });
 
         /**
@@ -366,15 +364,13 @@ class TypeMe {
              */
              if (element.tagName.toLowerCase() === "input" && element.getAttribute("type") === "text" || element.tagName.toLowerCase() === "textarea"){
                 element.value = element.value.substring(0, this.currentLetterIndex);
-                element.scrollLeft = element.scrollWidth;
-                element.scrollTop = element.scrollHeight;
             }
             else {
                 const span = element.querySelector("span:first-child");
                 span.textContent = span.textContent.substring(0, this.currentLetterIndex);
-                element.scrollLeft = element.scrollWidth;
-                element.scrollTop = element.scrollHeight;
             }
+            element.scrollLeft = element.scrollWidth;
+            element.scrollTop = element.scrollHeight;
         });
 
         /**

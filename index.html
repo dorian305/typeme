@@ -27,8 +27,8 @@
 <link href="site.css?ver=2" rel="stylesheet" type="text/css">
 
 <!-- Scripts -->
-<script src="src/typeme-min.js?ver=2" defer></script>
-<script src="site.js?ver=2" defer></script>
+<script src="src/typeme.js?ver=2" defer></script>
+<script src="site.js?ver=2.1" defer></script>
 </head>
 
 <body>
@@ -82,6 +82,7 @@
         <p><span class="inline-code">cursorClass: string</span> - Adds the class name to the cursor element</p>
         <p><span class="inline-code">cursor: string</span> - Sets the cursor element (Default: "|")</p>
         <p><span class="inline-code">cursorRemoveOnAnimationComplete: boolean</span> - Removes the cursor on animation completion</p>
+        <p><span class="inline-code">cursorAnimationSpeed: int</span> - Number of times cursor blinks in a second (Default: 2)</p>
         <p class="note">> If the animation is used on an input element, the cursor won't be displayed!</p>
         
         <!-- Code wrapper -->
@@ -107,6 +108,7 @@
                     cursorClass: "typingCursorClass",
                     cursor: "|",
                     cursorRemoveOnAnimationComplete: true,
+                    cursorAnimationSpeed: 2,
                 },
             });
             myTypeMe.start();
@@ -142,6 +144,8 @@
         <h3>Cursor properties</h3>
         <label>Cursor: <span id="tryIt_cursorValueSpan">|</span></label><br>
         <input type="text" value="|" class="input_text" id="cursor_input"><br>
+        <label>Cursor animation speed: <span id="tryIt_cursorAnimationSpeedValueSpan">2</span></label><br>
+        <input type="range" min="1" max="10" value="2" id="cursorAnimationSpeed_slider"> Max: <input class="input_number" type="number" id="cursorAnimationSpeed_maxValue" value="10"><br>
         <span class="booleanCheckboxSpan">Remove cursor on animation complete <input type="checkbox" id="cursorRemoveOnAnimationComplete_checkbox"></span>
         
         <!-- Code wrapper -->
@@ -157,9 +161,9 @@
                 properties: {
                     typeSpeed: 70,
                     backspaceSpeed: 20,
-                    pauseAfterFullstop: 500,
+                    pauseAfterFullstop: 130,
                     loop: false,
-                    stopOnLastString: true,
+                    stopOnLastString: false,
                     animationStartDelay: 750,
                     typeStartDelay: 500,
                     backspaceStartDelay: 500,
@@ -167,6 +171,7 @@
                 cursorProperties: {
                     cursor: "|",
                     cursorRemoveOnAnimationComplete: false,
+                    cursorAnimationSpeed: 2,
                 },
             });
         </div>

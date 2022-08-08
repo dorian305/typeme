@@ -68,7 +68,7 @@ let tryIt_animationInstance = new TypeMe({
 tryIt_animationInstance.start();
 
 //Sliders value change
-document.querySelectorAll("#typeSpeed_slider, #backspaceSpeed_slider, #fullstopPause_slider, #animationStartDelay_slider, #backspaceStartDelay_slider, #typeStartDelay_slider, #loop_checkbox, #stopOnLastString_checkbox, #cursorRemoveOnAnimationComplete_checkbox, #cursor_input").forEach(element => {
+document.querySelectorAll("#typeSpeed_slider, #backspaceSpeed_slider, #fullstopPause_slider, #animationStartDelay_slider, #backspaceStartDelay_slider, #typeStartDelay_slider, #loop_checkbox, #stopOnLastString_checkbox, #cursorRemoveOnAnimationComplete_checkbox, #cursor_input, #cursorAnimationSpeed_slider").forEach(element => {
     element.addEventListener("input", () => {
         // Input values
         let typeSpeed_value = parseInt(document.querySelector("#typeSpeed_slider").value);
@@ -78,6 +78,7 @@ document.querySelectorAll("#typeSpeed_slider, #backspaceSpeed_slider, #fullstopP
         let typeStartDelay_value = parseInt(document.querySelector("#typeStartDelay_slider").value);
         let backspaceStartDelay_value = parseInt(document.querySelector("#backspaceStartDelay_slider").value);
         let cursor_value = document.querySelector("#cursor_input").value;
+        let cursorAnimationSpeed_value = document.querySelector("#cursorAnimationSpeed_slider").value;
         
         //Updating span element values
         document.querySelector("#tryIt_typeSpeedValueSpan").textContent = typeSpeed_value;
@@ -87,6 +88,7 @@ document.querySelectorAll("#typeSpeed_slider, #backspaceSpeed_slider, #fullstopP
         document.querySelector("#tryIt_typeStartDelayValueSpan").textContent = typeStartDelay_value;
         document.querySelector("#tryIt_backspaceStartDelayValueSpan").textContent = backspaceStartDelay_value;
         document.querySelector("#tryIt_cursorValueSpan").textContent = cursor_value;
+        document.querySelector("#tryIt_cursorAnimationSpeedValueSpan").textContent = cursorAnimationSpeed_value;
 
         // Updating animation properties
         tryIt_animationInstance.typeSpeed = typeSpeed_value;
@@ -100,6 +102,7 @@ document.querySelectorAll("#typeSpeed_slider, #backspaceSpeed_slider, #fullstopP
 
         // Updating cursor properties
         tryIt_animationInstance.cursor = cursor_value;
+        tryIt_animationInstance.cursorAnimationSpeed = cursorAnimationSpeed_value;
         tryIt_animationInstance.cursorRemoveOnAnimationComplete = document.querySelector("#cursorRemoveOnAnimationComplete_checkbox").checked;
 
         //Restart an instance
@@ -128,6 +131,7 @@ document.querySelectorAll("#typeSpeed_slider, #backspaceSpeed_slider, #fullstopP
                 cursorProperties: {
                     cursor: "${cursor_value}",
                     cursorRemoveOnAnimationComplete: ${document.querySelector("#cursorRemoveOnAnimationComplete_checkbox").checked},
+                    cursorAnimationSpeed: ${cursorAnimationSpeed_value},
                 },
             });
         `;
@@ -135,7 +139,7 @@ document.querySelectorAll("#typeSpeed_slider, #backspaceSpeed_slider, #fullstopP
 });
 
 //Updating slider max value
-document.querySelectorAll("#typeSpeed_maxValue, #backspaceSpeed_maxValue, #fullstopPause_maxValue, #animationStartDelay_maxValue, #typeStartDelay_maxValue, #backspaceStartDelay_maxValue").forEach(element => {
+document.querySelectorAll("#typeSpeed_maxValue, #backspaceSpeed_maxValue, #fullstopPause_maxValue, #animationStartDelay_maxValue, #typeStartDelay_maxValue, #backspaceStartDelay_maxValue, #cursorAnimationSpeed_maxValue").forEach(element => {
     element.addEventListener("input", e => {
         e.target.previousElementSibling.setAttribute("max", e.target.value);
     });
@@ -175,7 +179,7 @@ let methods_restartButton = document.querySelector("#methods_restartButton");
         if (e.target === methods_resumeButton){
             methods_animationInstance.resume(() => console.log("Animation resumed"));
             methods_codeWrapper.textContent = `
-                methods_animationInstance.pause(() => {
+                methods_animationInstance.resume(() => {
                     console.log("Animation resumed");
                 });
             `;
@@ -184,7 +188,7 @@ let methods_restartButton = document.querySelector("#methods_restartButton");
         if (e.target === methods_toggleButton){
             methods_animationInstance.toggle(() => console.log(`Animation ${methods_animationInstance.animationPaused ? "paused" : "resumed"}`));
             methods_codeWrapper.textContent = `
-                methods_animationInstance.pause(() => {
+                methods_animationInstance.toggle(() => {
                     console.log("Animation paused / resumed");
                 });
             `;
@@ -193,7 +197,7 @@ let methods_restartButton = document.querySelector("#methods_restartButton");
         if (e.target === methods_restartButton){
             methods_animationInstance.restart(() => console.log(`Animation restarted`));
             methods_codeWrapper.textContent = `
-                methods_animationInstance.pause(() => {
+                methods_animationInstance.restart(() => {
                     console.log("Animation restarted");
                 });
             `;

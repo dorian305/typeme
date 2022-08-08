@@ -28,7 +28,7 @@
 
 <!-- Scripts -->
 <script src="src/typeme-min.js?ver=2.1" defer></script>
-<script src="site.js?ver=2.2" defer></script>
+<script src="site.js?ver=2.3" defer></script>
 </head>
 
 <body>
@@ -128,8 +128,8 @@
         <input type="range" min="1" max="100" value="70" id="typeSpeed_slider"> Max: <input class="input_number" type="number" id="typeSpeed_maxValue" value="100"><br>
         <label>Backspace speed: <span id="tryIt_backspaceSpeedValueSpan">20</span>ms</label><br>
         <input type="range" min="1" max="100" value="20" id="backspaceSpeed_slider"> Max: <input class="input_number" type="number" id="backspaceSpeed_maxValue" value="100"><br>
-        <label>Fullstop pause: <span id="tryIt_fullstopPauseValueSpan">130</span>ms</label><br>
-        <input type="range" min="1" max="1000" value="130" id="fullstopPause_slider"> Max: <input class="input_number" type="number" id="fullstopPause_maxValue" value="1000"><br>
+        <label>Fullstop pause: <span id="tryIt_fullstopPauseValueSpan">500</span>ms</label><br>
+        <input type="range" min="1" max="1000" value="500" id="fullstopPause_slider"> Max: <input class="input_number" type="number" id="fullstopPause_maxValue" value="1000"><br>
         <label>Animation start delay: <span id="tryIt_animationStartDelayValueSpan">750</span>ms</label><br>
         <input type="range" min="0" max="1000" value="750" id="animationStartDelay_slider"> Max: <input class="input_number" type="number" id="animationStartDelay_maxValue" value="1000"><br>
         <label>Type start delay: <span id="tryIt_typeStartDelayValueSpan">500</span>ms</label><br>
@@ -161,7 +161,7 @@
                 properties: {
                     typeSpeed: 70,
                     backspaceSpeed: 20,
-                    pauseAfterFullstop: 130,
+                    pauseAfterFullstop: 500,
                     loop: false,
                     stopOnLastString: false,
                     animationStartDelay: 750,

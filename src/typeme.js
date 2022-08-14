@@ -283,7 +283,12 @@ class TypeMe {
             this.cursorStepValueSign = -1;
         }
         this.opacity += this.cursorStepValueSign * this.cursorStepValue;
-        this.typingCursors.forEach(typingCursor => typingCursor.style.opacity = `${this.opacity}`);
+        // Animate cursor blinking only if it's not hidden
+        this.typingCursors.forEach(cursor => {
+            if (cursor.style.display !== "none"){
+                cursor.style.opacity = `${this.opacity}`;
+            }
+        });
         this.typingCursorAnimationTimerID = new Timer(() => this.#cursorOpacityAnimation(), (1000 / this.cursorAnimationSpeed) / 20, true);
     }
 
